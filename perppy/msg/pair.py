@@ -2,4 +2,5 @@
 
 class Pair:
     def __init__(self):
-        pass
+        self.addr = None
+        self.name = None
