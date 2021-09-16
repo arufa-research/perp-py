@@ -22,6 +22,6 @@ setuptools.setup(
     ],
     python_requires='>=3.6',
     install_requires=[
-        'eth-brownie >= 1.16.0',
+        'web3 >= 15.20.0',
     ],
 )
