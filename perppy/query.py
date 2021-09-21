@@ -1,52 +1,34 @@
 import time
-import datetime as dt
-from web3 import Web3
-from web3.middleware import local_filter_middleware
 
 from perppy.utils.abi import AbiFactory
 from perppy.utils.metadata import MetaData
+from perppy.utils.provider import Web3ProviderFactory
+from perppy.msg.event.position_changed import PositionChanged
 from perppy.utils.constants import get_network_url, ETH_DECIMALS
 
 
 def get_position_changes(
     trader: str = None,
     pair: str = None,
-    block_limit: int = 10,
+    block_limit: int = 2,
     network_name: str = 'Homestead'
 ) -> str:
-    w3 = Web3(Web3.HTTPProvider(get_network_url(network_name)))
-    w3.middleware_onion.add(local_filter_middleware)
+    w3_provider = Web3ProviderFactory().get_provider(network_name)
     addr = MetaData().get_layer2_contract('ClearingHouse')
     abi  = AbiFactory().get_contract_abi('ClearingHouse')
 
-    block_number: int = w3.eth.getBlock('latest').number
-    contract = w3.eth.contract(address=addr, abi=abi)
+    block_number: int = w3_provider.eth.getBlock('latest').number
+    contract = w3_provider.eth.contract(address=addr, abi=abi)
     filter = contract.events.PositionChanged.createFilter(
         fromBlock=block_number-block_limit,
         toBlock=block_number
     )
 
-    amm_pair_map = dict()
-
+    event_msgs = []
     for event in filter.get_all_entries():
-        event_block_number = event.blockNumber
-        event_block_timestamp = w3.eth.get_block(event_block_number).timestamp
-        event_datetime = dt.datetime.fromtimestamp(event_block_timestamp).strftime("%Y/%m/%d %H:%M")
-        tx_hash = event.transactionHash.hex()
-        trader = event.args.trader
-        value = event.args.positionNotional / ETH_DECIMALS
-        pos_size = event.args.exchangedPositionSize / ETH_DECIMALS
-        price = value / pos_size
-        side = "buy" if pos_size > 0 else "sell"
-
-        amm_addr = event.args.amm
-        amm_abi  = AbiFactory().get_contract_abi('Amm')
-        amm_contract = w3.eth.contract(address=amm_addr, abi=amm_abi)
-        pair_name = amm_contract.functions.priceFeedKey().call().decode('utf-8').replace('\x00', '')
-
-        print(tx_hash, pair_name, event_datetime)
-        print(trader, value, pos_size, price, side)
-        return event
+        event_msg = PositionChanged(event, network_name)
+        event_msgs.append(event_msg)
+    return event_msgs
 
 
 def get_portfolio(trader: str):
