@@ -6,7 +6,7 @@ from perppy.utils.constants import ETH_DECIMALS
 
 
 class PositionChanged:
-    def __init__(self, event, network_name):
+    def __init__(self, event, network):
         self.tx_hash     = str()
         self.trader_addr = str()
         self.datetime    = None
@@ -16,11 +16,11 @@ class PositionChanged:
         self.side        = str()
         self.pos_size    = float()
 
-        self.network_name = network_name
+        self.network = network
         self._from_event(event)
 
     def _from_event(self, event):
-        w3_provider = Web3ProviderFactory().get_provider(self.network_name)
+        w3_provider = Web3ProviderFactory().get_layer2_provider(self.network)
         event_block_number = event.blockNumber
         event_block_timestamp = w3_provider.eth.get_block(event_block_number).timestamp
         self.datetime = dt.datetime.fromtimestamp(event_block_timestamp).strftime("%Y/%m/%d %H:%M")
