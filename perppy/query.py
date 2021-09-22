@@ -1,6 +1,7 @@
 import time
 from web3 import Web3
 
+from perppy.msg.amm import Amm
 from perppy.msg.trader import Trader
 from perppy.utils.abi import AbiFactory
 from perppy.utils.metadata import MetaData
@@ -68,11 +69,24 @@ def get_trader_portfolio(
 def get_all_amms(
     network: str = 'production'
 ):
-    pass
+    w3_provider_layer2 = Web3ProviderFactory().get_layer2_provider(network)
+
+    insurance_fund_addr = MetaData().get_layer2_contract('InsuranceFund')
+    insurance_fund_abi  = AbiFactory().get_contract_abi('InsuranceFund')
+    insurance_fund_contract = w3_provider_layer2.eth.contract(address=insurance_fund_addr, abi=insurance_fund_abi)
+
+    amms = []
+    for amm_addr in insurance_fund_contract.functions.getAllAmms().call():
+        amm = get_amm_info(amm_addr, network)
+        amms.append(amm)
+    return amms
 
 
-def get_amm_info(amm_addr: str, amm_pair: str, short_name: bool = False):
-    pass
+def get_amm_info(
+    amm_addr: str,
+    network: str = 'production'
+):
+    return Amm(amm_addr, network)
 
 
 def verify_function_data(contract_addr: str, byte_code: str):
