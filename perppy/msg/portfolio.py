@@ -1,9 +1,14 @@
 
+from perppy.utils.abi import AbiFactory
+from perppy.utils.metadata import MetaData
+from perppy.utils.constants import ETH_DECIMALS, MAINTENANCE_MARGIN_RATIO
+from perppy.utils.provider import Web3ProviderFactory
+
 
 class Portfolio:
-    def __init__(self):
-        self.trader_addr  = None
-        self.amm_addr     = None
+    def __init__(self, amm_addr, trader_addr, network):
+        self.amm_addr     = amm_addr
+        self.trader_addr  = trader_addr
         self.pair_name    = None
 
         self.pos_size     = None
@@ -14,6 +19,43 @@ class Portfolio:
         self.liq_price    = None
         self.notional_val = None
         self.last_block   = None
+
+        self._fetch_values(network)
+
+    def _fetch_values(self, network):
+        w3_provider = Web3ProviderFactory().get_layer2_provider(network)
+        clearing_house_viewer_addr = MetaData().get_layer2_contract('ClearingHouseViewer')
+        clearing_house_viewer_abi  = AbiFactory().get_contract_abi('ClearingHouseViewer')
+        clearing_house_viewer_contract = w3_provider.eth.contract(address=clearing_house_viewer_addr, abi=clearing_house_viewer_abi)
+
+        clearing_house_addr = MetaData().get_layer2_contract('ClearingHouse')
+        clearing_house_abi  = AbiFactory().get_contract_abi('ClearingHouse')
+        clearing_house_contract = w3_provider.eth.contract(address=clearing_house_addr, abi=clearing_house_abi)
+
+        amm_pos = clearing_house_viewer_contract.functions.getPersonalPositionWithFundingPayment(self.amm_addr, self.trader_addr).call()
+        if amm_pos[0][0] == 0:  # position size is 0
+            return None
+        self.pos_size     = amm_pos[0][0] / ETH_DECIMALS
+        self.margin       = amm_pos[1][0] / ETH_DECIMALS
+        self.notional_val = amm_pos[2][0] / ETH_DECIMALS
+        self.last_block   = amm_pos[5]
+
+        amm_abi  = AbiFactory().get_contract_abi('Amm')
+        amm_contract = w3_provider.eth.contract(address=self.amm_addr, abi=amm_abi)
+        self.pair_name = amm_contract.functions.priceFeedKey().call().decode('utf-8').replace('\x00', '') + "/USDC"
+
+        amm_margin_ratio = clearing_house_viewer_contract.functions.getMarginRatio(self.amm_addr, self.trader_addr).call()
+        self.margin_ratio = amm_margin_ratio[0]
+
+        pos_notional_and_pnl = clearing_house_contract.functions.getPositionNotionalAndUnrealizedPnl(
+            self.amm_addr,
+            self.trader_addr,
+            0
+        ).call()
+        self.pnl = pos_notional_and_pnl[1][0] / ETH_DECIMALS
+        self.leverage = pos_notional_and_pnl[0][0] / (amm_pos[1][0] + pos_notional_and_pnl[1][0])
+
+        # self.liq_price = 
 
     def __repr__(self):
         retStr = f"Portfolio("

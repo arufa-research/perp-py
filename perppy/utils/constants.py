@@ -1,6 +1,8 @@
 
 ETH_DECIMALS = 10**18
 
+MAINTENANCE_MARGIN_RATIO = 0.0625 * ETH_DECIMALS
+
 PRODUCTION_METADATA_URL = "https://metadata.perp.exchange/production.json"
 STAGING_METADATA_URL    = "https://metadata.perp.exchange/staging.json"
 
