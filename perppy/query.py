@@ -11,9 +11,9 @@ def get_position_changes(
     trader: str = None,
     pair: str = None,
     block_limit: int = 2,
-    network_name: str = 'Homestead'
-) -> str:
-    w3_provider = Web3ProviderFactory().get_provider(network_name)
+    network: str = 'production'
+):
+    w3_provider = Web3ProviderFactory().get_layer2_provider(network)
     addr = MetaData().get_layer2_contract('ClearingHouse')
     abi  = AbiFactory().get_contract_abi('ClearingHouse')
 
@@ -26,12 +26,25 @@ def get_position_changes(
 
     event_msgs = []
     for event in filter.get_all_entries():
-        event_msg = PositionChanged(event, network_name)
+        event_msg = PositionChanged(event, network)
         event_msgs.append(event_msg)
     return event_msgs
 
 
-def get_portfolio(trader: str):
+def get_trader_portfolio(
+    trader: str,
+    network: str = 'production'
+):
+    w3_provider = Web3ProviderFactory().get_layer2_provider(network)
+    layer1_balance = 
+    layer2_balance = 
+
+
+
+
+def get_all_amms(
+    network: str = 'production'
+):
     pass
 
 
