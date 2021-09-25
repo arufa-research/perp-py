@@ -87,7 +87,3 @@ def get_amm_info(
     network: str = 'production'
 ):
     return Amm(amm_addr, network)
-
-
-def verify_function_data(contract_addr: str, byte_code: str):
-    pass
