@@ -5,7 +5,7 @@ Python SDK for Perpetual Protocol.
 ## Installation
 
 ```bash
-pip install perp-py
+$ pip install perp-py
 ```
 
 ## Installing from source
@@ -13,10 +13,10 @@ pip install perp-py
 ### Running locally without installation
 
 ```bash
-git clone https://github.com/arufa-research/perp-py
-cd perp-py/
+$ git clone https://github.com/arufa-research/perp-py
+$ cd perp-py/
 
-python3
+$ python3
 ```
 
 In python interpreter:
@@ -35,23 +35,23 @@ from perppy.execute import *
 ### Installation
 
 ```bash
-git clone https://github.com/arufa-research/perp-py
-cd perp-py/
-python3 -m venv env
-source env/bin/activate
-pip install -r requirements.txt
-make install
+$ git clone https://github.com/arufa-research/perp-py
+$ cd perp-py/
+$ python3 -m venv env
+$ source env/bin/activate
+$ pip install -r requirements.txt
+$ make install
 ```
 
 ### Testing
 
 ```bash
-git clone https://github.com/arufa-research/perp-py
-cd perp-py/
-python3 -m venv env
-source env/bin/activate
-pip install -r requirements.txt
-make test
+$ git clone https://github.com/arufa-research/perp-py
+$ cd perp-py/
+$ python3 -m venv env
+$ source env/bin/activate
+$ pip install -r requirements.txt
+$ make test
 ```
 
 ## Example Usage
@@ -90,6 +90,8 @@ from perppy.query import get_all_amms, get_amm_info
 amm_list = get_all_amms()
 
 btc_amm = get_amm_info('BTC/USDC')
+print(btc_amm.addr)
+print(btc_amm.market_price)
 ```
 
 ### Execute transactions
