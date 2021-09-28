@@ -43,7 +43,7 @@ $ pip install -r requirements.txt
 $ make install
 ```
 
-### Testing
+### Running tests
 
 ```bash
 $ git clone https://github.com/arufa-research/perp-py
@@ -82,7 +82,7 @@ print(trader_portfolio.layer2_balance)
 print(trader_portfolio.portfolios['PERP/USDC'])
 ```
 
-+   Query information of all AMMs or one AMM. `get_all_amms()` returns list of `Amm` objects. `get_amm_info(pair_name)` returns the `Amm` object for given `pai_name`.
++   Query information of all AMMs or one AMM. `get_all_amms()` returns list of `Amm` objects. `get_amm_info(pair_name)` returns the `Amm` object for given `pair_name`.
 
 ```python
 from perppy.query import get_all_amms, get_amm_info
