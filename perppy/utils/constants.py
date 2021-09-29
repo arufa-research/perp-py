@@ -3,6 +3,9 @@ ETH_DECIMALS = 10**18
 
 MAINTENANCE_MARGIN_RATIO = 0.0625 * ETH_DECIMALS
 
+DEFAULT_LAYER1_GAS_PRICE = 20 * 10**9
+DEFAULT_LAYER2_GAS_PRICE = 10**9
+
 PRODUCTION_METADATA_URL = "https://metadata.perp.exchange/production.json"
 STAGING_METADATA_URL    = "https://metadata.perp.exchange/staging.json"
 
