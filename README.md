@@ -2,7 +2,7 @@
 
 | Build  | Coverage | PyPi | 
 | ------------- | ------------- | ------------- |
-| [![Tests](https://github.com/arufa-research/perp-py/actions/workflows/python-package.yml/badge.svg?branch=master)](https://github.com/arufa-research/perp-py/actions/workflows/python-package.yml) | ![Documentation Status(https://readthedocs.org/projects/perp-py/badge/?version=latest)](https://perp-py.readthedocs.io/en/latest/)  | [![PyPI version](https://badge.fury.io/py/perp-py.svg)](https://badge.fury.io/py/perp-py) |
+| [![Tests](https://github.com/arufa-research/perp-py/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/arufa-research/perp-py/actions/workflows/build.yml) | [![Docs](https://readthedocs.org/projects/perp-py/badge/?version=latest)](https://perp-py.readthedocs.io/en/latest/)  | [![PyPI version](https://badge.fury.io/py/perp-py.svg)](https://badge.fury.io/py/perp-py) |
 
 Python SDK for Perpetual Protocol.
 
