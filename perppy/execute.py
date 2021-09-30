@@ -1,4 +1,4 @@
-# import time
+import os
 from enum import IntEnum
 from web3 import Web3
 
@@ -18,13 +18,13 @@ class Side(IntEnum):
 
 
 class ExecuteConnector:
-    def __init__(self, mnemonic: str, network = 'production'):
+    def __init__(self, private_key_env_var: str, network = 'production'):
         self.network         = network
         self.layer1_provider = Web3ProviderFactory().get_layer1_provider(self.network)
         self.layer2_provider = Web3ProviderFactory().get_layer2_provider(self.network)
 
-        self.layer1_account  = self.layer1_provider.eth.account.privateKeyToAccount(mnemonic)
-        self.layer2_account  = self.layer2_provider.eth.account.privateKeyToAccount(mnemonic)
+        self.layer1_account  = self.layer1_provider.eth.account.privateKeyToAccount(os.environ[private_key_env_var])
+        self.layer2_account  = self.layer2_provider.eth.account.privateKeyToAccount(os.environ[private_key_env_var])
 
     def _approve_layer1_bridge( # bridge from layer 1 to layer 2
         self,
