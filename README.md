@@ -1,6 +1,6 @@
 # PerpPy
 
-| Build  | Coverage | PyPi | 
+| Build  | Docs | PyPi | 
 | ------------- | ------------- | ------------- |
 | [![Tests](https://github.com/arufa-research/perp-py/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/arufa-research/perp-py/actions/workflows/build.yml) | [![Docs](https://readthedocs.org/projects/perp-py/badge/?version=latest)](https://perp-py.readthedocs.io/en/latest/)  | [![PyPI version](https://badge.fury.io/py/perp-py.svg)](https://badge.fury.io/py/perp-py) |
 
