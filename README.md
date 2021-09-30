@@ -60,6 +60,18 @@ $ make test
 
 ## Example Usage
 
+### Connectors usage
+
+**Query connector**: 
+
+```python
+```
+
+**Execute connector**:
+
+```python
+```
+
 ### Query data
 
 +   Query recent positions. User can specify the network (production/staging) and add filters such as trader address, block limit and pair name. `get_position_changes()` returns a list of `Position` objects. 
@@ -67,7 +79,7 @@ $ make test
 ```python
 from perppy.query import QueryConnector
 
-query_conn = QueryConnector()
+query_conn = QueryConnector(network='production)
 
 print(query_conn.get_position_changes())
 print(query_conn.get_position_changes(pair='BTC/USDC'))
@@ -79,7 +91,7 @@ print(query_conn.get_position_changes(pair='BTC/USDC', block_limit=10))
 ```python
 from perppy.query import QueryConnector
 
-query_conn = QueryConnector()
+query_conn = QueryConnector(network='production)
 
 trader_portfolio = query_conn.get_trader_portfolio('')
 
@@ -94,7 +106,7 @@ print(trader_portfolio.portfolios['PERP/USDC'])
 ```python
 from perppy.query import QueryConnector
 
-query_conn = QueryConnector()
+query_conn = QueryConnector(network='production)
 
 amm_list = query_conn.get_all_amms()
 
@@ -105,9 +117,94 @@ print(btc_amm.market_price)
 
 ### Execute transactions
 
+Export environment variable for your account's private key:
+
+```bash
+$ export PRIVATE_KEY='<YOUR_KEY_HERE>'
+```
+
+**Note**: Above variable exported is `PRIVATE_KEY`, so first argument in constructor of `ExecuteConnector` should be `'PRIVATE_KEY'`.
+
++   Deposit USDC to layer 2 (xDai).
+
+```python
+from perppy.execute import ExecuteConnector
+
+exec_conn = ExecuteConnector('PRIVATE_KEY', network='staging')
+response = exec_conn.deposit_to_layer2(1000)   # 1000.0 USDC
+print(response)
+```
+
++   Withdraw USDC from layer 2 (xDai).
+
+```python
+from perppy.execute import ExecuteConnector
+
+exec_conn = ExecuteConnector('PRIVATE_KEY', network='staging')
+response = exec_conn.withdraw_from_layer2(1000)   # 1000.0 USDC
+print(response)
+```
+
++   Open position.
+
+```python
+from perppy.execute import ExecuteConnector
+
+exec_conn = ExecuteConnector('PRIVATE_KEY', network='staging')
+response = exec_conn.open_position(1000)   # 1000.0 USDC
+print(response)
+```
+
++   Close position.
+
+```python
+from perppy.execute import ExecuteConnector
+
+exec_conn = ExecuteConnector('PRIVATE_KEY', network='staging')
+response = exec_conn.close_position(1000)   # 1000.0 USDC
+print(response)
+```
+
++   Add margin.
+
+```python
+from perppy.execute import ExecuteConnector
+
+exec_conn = ExecuteConnector('PRIVATE_KEY', network='staging')
+response = exec_conn.add_margin(1000)   # 1000.0 USDC
+print(response)
+```
+
++   Remove margin.
+
+```python
+from perppy.execute import ExecuteConnector
+
+exec_conn = ExecuteConnector('PRIVATE_KEY', network='staging')
+response = exec_conn.remove_margin(1000)   # 1000.0 USDC
+print(response)
+```
+
 ### Staking
 
-### Faucet
+Export environment variable for your account's private key:
+
+```bash
+$ export PRIVATE_KEY='<YOUR_KEY_HERE>'
+```
+
+**Note**: Above variable exported is `PRIVATE_KEY`, so first argument in constructor of `StakingConnector` should be `'PRIVATE_KEY'`.
+
++ Stake PERP tokens.
+
+```python
+```
+
++ Unstake PERP tokens.
+
+```python
+```
+
 
 ## Documentation
 

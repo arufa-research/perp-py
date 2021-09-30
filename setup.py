@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="perp-py",
-    version="0.0.6",
+    version="0.0.2",
     author="Udit Gulati",
     author_email="uditgulati0@gmail.com",
     description="Python SDK for Perpetual Protocol",
