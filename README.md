@@ -43,34 +43,28 @@ $ git clone https://github.com/arufa-research/perp-py
 $ cd perp-py/
 $ python3 -m venv env
 $ source env/bin/activate
-$ pip install -r requirements.txt
 $ make install
 ```
 
 ### Running tests
 
 ```bash
-$ git clone https://github.com/arufa-research/perp-py
-$ cd perp-py/
-$ python3 -m venv env
-$ source env/bin/activate
-$ pip install -r requirements.txt
 $ make test
 ```
 
+### Running linter
+
+```bash
+$ make lint
+```
+
+### Generate docs
+
+```bash
+$ make docs
+```
+
 ## Example Usage
-
-### Connectors usage
-
-**Query connector**: 
-
-```python
-```
-
-**Execute connector**:
-
-```python
-```
 
 ### Query data
 
@@ -79,7 +73,7 @@ $ make test
 ```python
 from perppy.query import QueryConnector
 
-query_conn = QueryConnector(network='production)
+query_conn = QueryConnector(network='production')
 
 print(query_conn.get_position_changes())
 print(query_conn.get_position_changes(pair='BTC/USDC'))
@@ -91,7 +85,7 @@ print(query_conn.get_position_changes(pair='BTC/USDC', block_limit=10))
 ```python
 from perppy.query import QueryConnector
 
-query_conn = QueryConnector(network='production)
+query_conn = QueryConnector(network='production')
 
 trader_portfolio = query_conn.get_trader_portfolio('')
 
@@ -106,7 +100,7 @@ print(trader_portfolio.portfolios['PERP/USDC'])
 ```python
 from perppy.query import QueryConnector
 
-query_conn = QueryConnector(network='production)
+query_conn = QueryConnector(network='production')
 
 amm_list = query_conn.get_all_amms()
 

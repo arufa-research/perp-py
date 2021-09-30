@@ -12,5 +12,6 @@ test:
 	pytest
 docs:
 	make -C docs/ html
+	firefox docs/_build/html/index.html &
 install-env:
 	python3 -m venv env
