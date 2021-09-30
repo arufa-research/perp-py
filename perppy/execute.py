@@ -105,8 +105,8 @@ class ExecuteConnector:
         base_asset_amount_limit: float,
         gasLimit: float = 0.,
     ):
-        # if side not in [Side.LONG, Side.SHORT]:
-        #     raise ValueError(f"Invalid side, {side}")
+        if side not in [Side.LONG, Side.SHORT]:
+            raise ValueError(f"Invalid side, {side}")
 
         if quote_asset_amount <= 0.0:
             raise ValueError(f"Invalid Quote asset amount, {quote_asset_amount}")

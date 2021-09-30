@@ -19,7 +19,7 @@ class QueryConnector:
         self,
         trader: str = None,
         pair: str = None,
-        block_limit: int = 2,
+        block_limit: int = 5,
     ):
         w3_provider = Web3ProviderFactory().get_layer2_provider(self.network)
         addr = MetaData().get_layer2_contract('ClearingHouse', network=self.network)

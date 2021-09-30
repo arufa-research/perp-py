@@ -1,5 +1,9 @@
 # PerpPy
 
+| Build  | Coverage | PyPi | 
+| ------------- | ------------- | ------------- |
+| [![Tests](https://github.com/arufa-research/perp-py/actions/workflows/python-package.yml/badge.svg?branch=master)](https://github.com/arufa-research/perp-py/actions/workflows/python-package.yml) | ![Documentation Status(https://readthedocs.org/projects/perp-py/badge/?version=latest)](https://perp-py.readthedocs.io/en/latest/)  | [![PyPI version](https://badge.fury.io/py/perp-py.svg)](https://badge.fury.io/py/perp-py) |
+
 Python SDK for Perpetual Protocol.
 
 ## Installation
@@ -25,11 +29,11 @@ In python interpreter:
 # import the whole library
 import perpy
 
-## import query functions
-from perppy.query import *
+## import query connector
+from perppy.query import QueryConnector
 
-## import execute functions
-from perppy.execute import *
+## import execute connector
+from perppy.execute import ExecuteConnector
 ```
 
 ### Installation
@@ -61,20 +65,23 @@ $ make test
 +   Query recent positions. User can specify the network (production/staging) and add filters such as trader address, block limit and pair name. `get_position_changes()` returns a list of `Position` objects. 
 
 ```python
-from perppy.query import get_position_changes
+from perppy.query import QueryConnector
 
-print(get_position_changes())
-print(get_position_changes(pair='BTC/USDC'))
-print(get_position_changes(pair='BTC/USDC', block_limit=10))
-print(get_position_changes(network='staging'))
+query_conn = QueryConnector()
+
+print(query_conn.get_position_changes())
+print(query_conn.get_position_changes(pair='BTC/USDC'))
+print(query_conn.get_position_changes(pair='BTC/USDC', block_limit=10))
 ```
 
 +   Query trader portfolio using trader address. 
 
 ```python
-from perppy.query import get_trader_portfolio
+from perppy.query import QueryConnector
 
-trader_portfolio = get_trader_portfolio('')
+query_conn = QueryConnector()
+
+trader_portfolio = query_conn.get_trader_portfolio('')
 
 print(trader_portfolio.layer1_balance)
 print(trader_portfolio.layer2_balance)
@@ -85,11 +92,13 @@ print(trader_portfolio.portfolios['PERP/USDC'])
 +   Query information of all AMMs or one AMM. `get_all_amms()` returns list of `Amm` objects. `get_amm_info(pair_name)` returns the `Amm` object for given `pair_name`.
 
 ```python
-from perppy.query import get_all_amms, get_amm_info
+from perppy.query import QueryConnector
 
-amm_list = get_all_amms()
+query_conn = QueryConnector()
 
-btc_amm = get_amm_info('BTC/USDC')
+amm_list = query_conn.get_all_amms()
+
+btc_amm = query_conn.get_amm_info('BTC/USDC')
 print(btc_amm.addr)
 print(btc_amm.market_price)
 ```
