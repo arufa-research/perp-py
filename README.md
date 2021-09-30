@@ -12,9 +12,35 @@ Python SDK for Perpetual Protocol.
 $ pip install perp-py
 ```
 
-## Installing from source
+## Installation from source
 
-### Running locally without installation
+```bash
+$ git clone https://github.com/arufa-research/perp-py
+$ cd perp-py/
+$ python3 -m venv env
+$ source env/bin/activate
+$ make install
+```
+
+### Run tests
+
+```bash
+$ make test
+```
+
+### Run linter
+
+```bash
+$ make lint
+```
+
+### Generate docs
+
+```bash
+$ make docs
+```
+
+## Run locally without installation
 
 ```bash
 $ git clone https://github.com/arufa-research/perp-py
@@ -34,34 +60,6 @@ from perppy.query import QueryConnector
 
 ## import execute connector
 from perppy.execute import ExecuteConnector
-```
-
-### Installation
-
-```bash
-$ git clone https://github.com/arufa-research/perp-py
-$ cd perp-py/
-$ python3 -m venv env
-$ source env/bin/activate
-$ make install
-```
-
-### Running tests
-
-```bash
-$ make test
-```
-
-### Running linter
-
-```bash
-$ make lint
-```
-
-### Generate docs
-
-```bash
-$ make docs
 ```
 
 ## Example Usage
