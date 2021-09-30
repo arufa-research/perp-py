@@ -22,7 +22,7 @@ class QueryConnector:
         block_limit: int = 2,
     ):
         w3_provider = Web3ProviderFactory().get_layer2_provider(self.network)
-        addr = MetaData().get_layer2_contract('ClearingHouse')
+        addr = MetaData().get_layer2_contract('ClearingHouse', network=self.network)
         abi  = AbiFactory().get_contract_abi('ClearingHouse')
 
         block_number: int = w3_provider.eth.getBlock('latest').number
@@ -45,17 +45,17 @@ class QueryConnector:
         w3_provider_layer1 = Web3ProviderFactory().get_layer1_provider(self.network)
         w3_provider_layer2 = Web3ProviderFactory().get_layer2_provider(self.network)
 
-        layer1_usdc_addr = Web3.toChecksumAddress('0x40d3b2f06f198d2b789b823cdbecd1db78090d74')
+        layer1_usdc_addr = Web3.toChecksumAddress(MetaData().get_layer1_contract('usdc', network=self.network))
         layer1_usdc_abi  = AbiFactory().get_contract_abi('usdc')
         layer1_usdc_contract = w3_provider_layer1.eth.contract(address=layer1_usdc_addr, abi=layer1_usdc_abi)
         layer1_balance = layer1_usdc_contract.functions.balanceOf(trader).call() / 10**layer1_usdc_contract.functions.decimals().call()
 
-        layer2_usdc_addr = MetaData().get_layer2_contract('usdc')
+        layer2_usdc_addr = MetaData().get_layer2_contract('usdc', network=self.network)
         layer2_usdc_abi  = AbiFactory().get_contract_abi('usdc')
         layer2_usdc_contract = w3_provider_layer2.eth.contract(address=layer2_usdc_addr, abi=layer2_usdc_abi)
         layer2_balance = layer2_usdc_contract.functions.balanceOf(trader).call() / 10**layer2_usdc_contract.functions.decimals().call()
 
-        insurance_fund_addr = MetaData().get_layer2_contract('InsuranceFund')
+        insurance_fund_addr = MetaData().get_layer2_contract('InsuranceFund', network=self.network)
         insurance_fund_abi  = AbiFactory().get_contract_abi('InsuranceFund')
         insurance_fund_contract = w3_provider_layer2.eth.contract(address=insurance_fund_addr, abi=insurance_fund_abi)
 
@@ -73,13 +73,13 @@ class QueryConnector:
     ):
         w3_provider_layer2 = Web3ProviderFactory().get_layer2_provider(self.network)
 
-        insurance_fund_addr = MetaData().get_layer2_contract('InsuranceFund')
+        insurance_fund_addr = MetaData().get_layer2_contract('InsuranceFund', network=self.network)
         insurance_fund_abi  = AbiFactory().get_contract_abi('InsuranceFund')
         insurance_fund_contract = w3_provider_layer2.eth.contract(address=insurance_fund_addr, abi=insurance_fund_abi)
 
         amms = []
         for amm_addr in insurance_fund_contract.functions.getAllAmms().call():
-            amm = get_amm_info(amm_addr, network)
+            amm = self.get_amm_info(amm_addr)
             amms.append(amm)
         return amms
 
@@ -87,4 +87,4 @@ class QueryConnector:
         self,
         amm_addr: str,
     ):
-        return Amm(amm_addr, network)
+        return Amm(amm_addr, self.network)
