@@ -12,3 +12,5 @@ test:
 	pytest
 docs:
 	make -C docs/ html
+install-env:
+	python3 -m venv env
