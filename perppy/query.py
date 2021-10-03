@@ -11,6 +11,10 @@ from perppy.utils.constants import get_network_url, ETH_DECIMALS
 
 
 class QueryConnector:
+    """
+        QueryConnector acts as a client to query
+        exchange data from perp.exchange
+    """
     def __init__(self, network: str = 'production'):
         self.network = network
 

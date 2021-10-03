@@ -18,6 +18,10 @@ class Side(IntEnum):
 
 
 class ExecuteConnector:
+    """
+        ExecuteConnector acts as a client to execute
+        transaction on perp.exchange
+    """
     def __init__(self, private_key_env_var: str, network = 'production'):
         self.network         = network
         self.layer1_provider = Web3ProviderFactory().get_layer1_provider(self.network)
