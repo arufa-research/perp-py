@@ -3,13 +3,6 @@ Introduction
 
 PerPy is a Python library for interacting with Perpetual protocol.
 
-Getting Started
----------------
-
-Your next steps depend on where you're standing:
-
-- Ready to code? → :ref:`quickstart`
-
 Table of Contents
 -----------------
 
@@ -19,42 +12,32 @@ Table of Contents
 
     quickstart
     overview
-    releases
+    modules 
 
 .. toctree::
     :maxdepth: 1
     :caption: Guides
 
-    node
     providers
     examples
     troubleshooting
-    web3.eth.account
-    filters
-    contracts
-    abi_types
-    middleware
-    internals
-    ethpm
-    ens_overview
-    v5_migration
-    v4_migration
 
 .. toctree::
     :maxdepth: 1
     :caption: API
 
-    web3.main
-    web3.eth
-    web3.beacon
-    web3.pm
-    web3.net
-    web3.miner
-    web3.geth
-    web3.parity
-    gas_price
-    ens
-    constants
+    query
+    execute
+    staking
+    msg.amm
+    msg.portfolio
+    msg.position
+    msg.trader
+    msg.event.position_changed
+    utils.abi
+    utils.constants
+    utils.metadata
+    utils.provider
 
 Indices and tables
 ------------------
