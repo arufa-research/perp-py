@@ -12,10 +12,15 @@ from perppy.utils.constants import get_network_url, ETH_DECIMALS
 
 class QueryConnector:
     """
-        QueryConnector acts as a client to query
-        exchange data from perp.exchange
+    QueryConnector acts as a client to query
+    exchange data from perp.exchange
     """
     def __init__(self, network: str = 'production'):
+        """
+        Create a new QueryConnector object.
+
+        :param network: Network to connect to. Valid values are 'production' and 'staging'
+        """
         self.network = network
 
     def get_position_changes(
@@ -24,6 +29,13 @@ class QueryConnector:
         pair: str = None,
         block_limit: int = 5,
     ):
+        """
+        Fetches recent position changes on the given network.
+
+        :param trader: Address of a trader
+        :param pair: Name of AMM pair
+        :param block_limit: Number of blocks from latest till which positions to be fetch
+        """
         w3_provider = Web3ProviderFactory().get_layer2_provider(self.network)
         addr = MetaData().get_layer2_contract('ClearingHouse', network=self.network)
         abi  = AbiFactory().get_contract_abi('ClearingHouse')
@@ -45,6 +57,11 @@ class QueryConnector:
         self,
         trader: str,
     ):
+        """
+        Fetches the portfolio information of a trader.
+
+        :param trader: Address of a trader
+        """
         w3_provider_layer1 = Web3ProviderFactory().get_layer1_provider(self.network)
         w3_provider_layer2 = Web3ProviderFactory().get_layer2_provider(self.network)
 
@@ -74,6 +91,9 @@ class QueryConnector:
     def get_all_amms(
         self,
     ):
+        """
+        Fetches the information of all available AMM pairs.
+        """
         w3_provider_layer2 = Web3ProviderFactory().get_layer2_provider(self.network)
 
         insurance_fund_addr = MetaData().get_layer2_contract('InsuranceFund', network=self.network)
@@ -90,4 +110,9 @@ class QueryConnector:
         self,
         amm_addr: str,
     ):
+        """
+        Fetches the information of given AMM pairs.
+
+        :pair amm_addr: Address of AMM pair
+        """
         return Amm(amm_addr, self.network)
