@@ -54,3 +54,5 @@ html_static_path = ['_static']
 html_css_files = ["css/toggle.css"]
 
 html_js_files = ["js/matomo.js", "js/toggle.js"]
+
+html_extra_path = ["_static/css"]

@@ -12,7 +12,6 @@ Table of Contents
 
     quickstart
     overview
-    modules 
 
 .. toctree::
     :maxdepth: 1
@@ -26,18 +25,9 @@ Table of Contents
     :maxdepth: 1
     :caption: API
 
-    query
-    execute
-    staking
-    msg.amm
-    msg.portfolio
-    msg.position
-    msg.trader
-    msg.event.position_changed
-    utils.abi
-    utils.constants
-    utils.metadata
-    utils.provider
+    perppy
+    perppy.msg
+    perppy.utils
 
 Indices and tables
 ------------------

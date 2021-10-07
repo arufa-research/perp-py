@@ -1,16 +1,5 @@
-perppy.msg package
+Messages API
 ==================
-
-Subpackages
------------
-
-.. toctree::
-   :maxdepth: 4
-
-   perppy.msg.event
-
-Submodules
-----------
 
 perppy.msg.amm module
 ---------------------
@@ -48,14 +37,6 @@ perppy.msg.trader module
 ------------------------
 
 .. automodule:: perppy.msg.trader
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: perppy.msg
    :members:
    :undoc-members:
    :show-inheritance:

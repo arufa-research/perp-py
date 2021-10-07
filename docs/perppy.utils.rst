@@ -1,8 +1,5 @@
-perppy.utils package
+Utils
 ====================
-
-Submodules
-----------
 
 perppy.utils.abi module
 -----------------------
@@ -40,14 +37,6 @@ perppy.utils.singleton module
 -----------------------------
 
 .. automodule:: perppy.utils.singleton
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: perppy.utils
    :members:
    :undoc-members:
    :show-inheritance:

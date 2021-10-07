@@ -1,20 +1,9 @@
-perppy package
+Connectors API
 ==============
 
-Subpackages
------------
+Connector classes explained below:  
 
-.. toctree::
-   :maxdepth: 4
-
-   perppy.msg
-   perppy.tests
-   perppy.utils
-
-Submodules
-----------
-
-perppy.execute module
+perppy.execute
 ---------------------
 
 .. automodule:: perppy.execute
@@ -22,7 +11,7 @@ perppy.execute module
    :undoc-members:
    :show-inheritance:
 
-perppy.query module
+perppy.query
 -------------------
 
 .. automodule:: perppy.query
@@ -30,18 +19,10 @@ perppy.query module
    :undoc-members:
    :show-inheritance:
 
-perppy.staking module
+perppy.staking
 ---------------------
 
 .. automodule:: perppy.staking
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: perppy
    :members:
    :undoc-members:
    :show-inheritance:
