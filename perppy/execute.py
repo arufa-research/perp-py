@@ -1,5 +1,4 @@
 import os
-from enum import IntEnum
 from web3 import Web3
 
 from perppy.msg.amm import Amm
@@ -9,12 +8,7 @@ from perppy.utils.metadata import MetaData
 # from perppy.msg.portfolio import Portfolio
 from perppy.utils.provider import Web3ProviderFactory
 # from perppy.msg.event.position_changed import PositionChanged
-from perppy.utils.constants import get_network_url, ETH_DECIMALS, DEFAULT_LAYER1_GAS_PRICE, DEFAULT_LAYER2_GAS_PRICE
-
-
-class Side(IntEnum):
-    LONG  = 0
-    SHORT = 1
+from perppy.utils.constants import Side, ETH_DECIMALS, DEFAULT_LAYER1_GAS_PRICE, DEFAULT_LAYER2_GAS_PRICE
 
 
 class ExecuteConnector:

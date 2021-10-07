@@ -1,3 +1,5 @@
+from enum import IntEnum
+
 
 ETH_DECIMALS = 10**18
 
@@ -31,6 +33,11 @@ NETWORK_MAP = {
     "Rinkeby": RINKEBY_URL,
     "Homestead": HOMESTEAD_URL,
 }
+
+
+class Side(IntEnum):
+    LONG  = 0
+    SHORT = 1
 
 
 def get_network_url(network_name: str) -> str:
