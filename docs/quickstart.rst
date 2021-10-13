@@ -135,7 +135,7 @@ Add margin.
     from perppy.execute import ExecuteConnector
 
     exec_conn = ExecuteConnector('PRIVATE_KEY', network='staging')
-    response = exec_conn.add_margin(1000)   # 1000.0 USDC
+    response = exec_conn.add_margin(10)
     print(response)
 
 
@@ -146,7 +146,7 @@ Remove margin.
     from perppy.execute import ExecuteConnector
 
     exec_conn = ExecuteConnector('PRIVATE_KEY', network='staging')
-    response = exec_conn.remove_margin(1000)   # 1000.0 USDC
+    response = exec_conn.remove_margin(10)
     print(response)
 
 
