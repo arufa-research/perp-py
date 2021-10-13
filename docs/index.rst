@@ -1,7 +1,7 @@
 Introduction
 ============
 
-PerPy is a Python library for interacting with Perpetual protocol.
+PerpPy is a Python library for interacting with Perpetual protocol.
 
 .. toctree::
     :maxdepth: 1

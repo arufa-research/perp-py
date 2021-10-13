@@ -1,7 +1,7 @@
 Utils
 ====================
 
-perppy.utils.abi module
+perppy.utils.abi
 -----------------------
 
 .. automodule:: perppy.utils.abi
@@ -9,7 +9,7 @@ perppy.utils.abi module
    :undoc-members:
    :show-inheritance:
 
-perppy.utils.constants module
+perppy.utils.constants
 -----------------------------
 
 .. automodule:: perppy.utils.constants
@@ -17,7 +17,7 @@ perppy.utils.constants module
    :undoc-members:
    :show-inheritance:
 
-perppy.utils.metadata module
+perppy.utils.metadata
 ----------------------------
 
 .. automodule:: perppy.utils.metadata
@@ -25,7 +25,7 @@ perppy.utils.metadata module
    :undoc-members:
    :show-inheritance:
 
-perppy.utils.provider module
+perppy.utils.provider
 ----------------------------
 
 .. automodule:: perppy.utils.provider
@@ -33,7 +33,7 @@ perppy.utils.provider module
    :undoc-members:
    :show-inheritance:
 
-perppy.utils.singleton module
+perppy.utils.singleton
 -----------------------------
 
 .. automodule:: perppy.utils.singleton

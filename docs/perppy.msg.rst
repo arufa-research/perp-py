@@ -1,7 +1,7 @@
 Messages API
 ==================
 
-perppy.msg.amm module
+perppy.msg.amm
 ---------------------
 
 .. automodule:: perppy.msg.amm
@@ -9,7 +9,7 @@ perppy.msg.amm module
    :undoc-members:
    :show-inheritance:
 
-perppy.msg.faucet module
+perppy.msg.faucet
 ------------------------
 
 .. automodule:: perppy.msg.faucet
@@ -17,7 +17,7 @@ perppy.msg.faucet module
    :undoc-members:
    :show-inheritance:
 
-perppy.msg.portfolio module
+perppy.msg.portfolio
 ---------------------------
 
 .. automodule:: perppy.msg.portfolio
@@ -25,7 +25,7 @@ perppy.msg.portfolio module
    :undoc-members:
    :show-inheritance:
 
-perppy.msg.position module
+perppy.msg.position
 --------------------------
 
 .. automodule:: perppy.msg.position
@@ -33,7 +33,7 @@ perppy.msg.position module
    :undoc-members:
    :show-inheritance:
 
-perppy.msg.trader module
+perppy.msg.trader
 ------------------------
 
 .. automodule:: perppy.msg.trader
