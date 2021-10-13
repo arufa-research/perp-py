@@ -6,7 +6,19 @@ from perppy.utils.constants import ETH_DECIMALS
 
 
 class Amm:
+    """
+    Amm object stores the information of a given AMM pair.
+
+    Amm object is returned when AMM related information
+    is queried from contracts.
+    """
     def __init__(self, amm_addr, network):
+        """
+        Create a new Amm object.
+
+        :param amm_addr: Address of Amm pair
+        :param network: Network to connect to. Valid values are 'production' and 'staging'
+        """
         self.addr      = amm_addr
         self.pair_name = None
 
@@ -22,6 +34,12 @@ class Amm:
         self._fetch_data(network)
 
     def _fetch_data(self, network):
+        """
+        Fetches information of Amm with address `self.addr` from input network.
+        Used internally by the class constructor.
+
+        :param network: Network to connect to. Valid values are 'production' and 'staging'
+        """
         w3_provider_layer2 = Web3ProviderFactory().get_layer2_provider(network)
 
         amm_abi  = AbiFactory().get_contract_abi('Amm')
@@ -51,6 +69,9 @@ class Amm:
             self.feed_name = None
 
     def __repr__(self):
+        """
+        String representation of Amm object. 
+        """
         retStr = f"Amm("
         retStr += f"Address: {self.addr}, "
         retStr += f"Pair: {self.pair_name}, "

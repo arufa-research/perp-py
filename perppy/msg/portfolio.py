@@ -6,7 +6,23 @@ from perppy.utils.provider import Web3ProviderFactory
 
 
 class Portfolio:
+    """
+    Portfolio object stores the portfolio related information of a given trader for a given AMM pair.
+
+    This class contains all the information related to the position
+    a trader has for a given AMM pair.
+
+    Portfolio object is returned portfolio or balances related information
+    is queried from contracts.
+    """
     def __init__(self, amm_addr, trader_addr, network):
+        """
+        Create a new Portfolio object.
+
+        :param amm_addr: Address of Amm pair
+        :param trader_addr: Address of trader
+        :param network: Network to connect to. Valid values are 'production' and 'staging'
+        """
         self.amm_addr     = amm_addr
         self.trader_addr  = trader_addr
         self.pair_name    = None
@@ -23,6 +39,12 @@ class Portfolio:
         self._fetch_values(network)
 
     def _fetch_values(self, network):
+        """
+        Fetches information of position of a trader `self.trader_addr` for Amm with address `self.amm_addr` from input network.
+        Used internally by the class constructor.
+
+        :param network: Network to connect to. Valid values are 'production' and 'staging'
+        """
         w3_provider = Web3ProviderFactory().get_layer2_provider(network)
         clearing_house_viewer_addr = MetaData().get_layer2_contract('ClearingHouseViewer')
         clearing_house_viewer_abi  = AbiFactory().get_contract_abi('ClearingHouseViewer')
@@ -58,6 +80,9 @@ class Portfolio:
         # self.liq_price = 
 
     def __repr__(self):
+        """
+        String representation of Portfolio object.
+        """
         retStr = f"Portfolio("
         retStr += f"Trader address: {self.trader_addr}, "
         retStr += f"AMM address: {self.amm_addr}, "

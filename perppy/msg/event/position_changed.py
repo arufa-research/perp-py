@@ -6,7 +6,19 @@ from perppy.utils.constants import ETH_DECIMALS
 
 
 class PositionChanged:
+    """
+    PositionChanged object stores the information of a position change event.
+
+    PositionChanged object is returned when information related
+    to changes in position is queried from contracts.
+    """
     def __init__(self, event, network):
+        """
+        Create a new PositionChanged object.
+
+        :param event: position changed event data fetched using web3.py
+        :param network: Network to connect to. Valid values are 'production' and 'staging'
+        """
         self.tx_hash     = str()
         self.trader_addr = str()
         self.datetime    = None
@@ -20,6 +32,12 @@ class PositionChanged:
         self._from_event(event)
 
     def _from_event(self, event):
+        """
+        Parses the information from event object and fetches additional info from input network.
+        Used internally by the class constructor.
+
+        :param event: position changed event data fetched using web3.py
+        """
         w3_provider = Web3ProviderFactory().get_layer2_provider(self.network)
         event_block_number = event.blockNumber
         event_block_timestamp = w3_provider.eth.get_block(event_block_number).timestamp
@@ -37,6 +55,9 @@ class PositionChanged:
         self.pair = amm_contract.functions.priceFeedKey().call().decode('utf-8').replace('\x00', '')
 
     def __repr__(self):
+        """
+        String representation of PositionChanged object. 
+        """
         retStr = f"PositionChanged("
         retStr += f"estimated time: {self.datetime}, "
         retStr += f"trader: {self.trader_addr}, "
