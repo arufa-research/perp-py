@@ -36,11 +36,17 @@ NETWORK_MAP = {
 
 
 class Side(IntEnum):
+    """
+    Side object is an enum strong side (long/short) of a position.
+    """
     LONG  = 0
     SHORT = 1
 
 
 def get_network_url(network_name: str) -> str:
+    """
+    Fetches RPC url for the given `network_name`.
+    """
     if network_name not in NETWORK_MAP:
         raise ValueError(f"Invalid network name {network_name}, available: {list(NETWORK_MAP.keys())}")
     return NETWORK_MAP[network_name]
