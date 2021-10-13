@@ -9,14 +9,6 @@ perppy.msg.amm
    :undoc-members:
    :show-inheritance:
 
-perppy.msg.faucet
-------------------------
-
-.. automodule:: perppy.msg.faucet
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 perppy.msg.portfolio
 ---------------------------
 
@@ -25,18 +17,18 @@ perppy.msg.portfolio
    :undoc-members:
    :show-inheritance:
 
-perppy.msg.position
---------------------------
-
-.. automodule:: perppy.msg.position
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 perppy.msg.trader
 ------------------------
 
 .. automodule:: perppy.msg.trader
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+perppy.msg.event.position\_changed module
+-----------------------------------------
+
+.. automodule:: perppy.msg.event.position_changed
    :members:
    :undoc-members:
    :show-inheritance:

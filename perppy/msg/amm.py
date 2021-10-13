@@ -7,9 +7,7 @@ from perppy.utils.constants import ETH_DECIMALS
 
 class Amm:
     """
-    Amm object stores the information of a given AMM pair.
-
-    Amm object is returned when AMM related information
+    Amm object stores the information of a given AMM pair. Amm object is returned when AMM related information
     is queried from contracts.
     """
     def __init__(self, amm_addr, network):
