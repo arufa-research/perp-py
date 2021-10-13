@@ -25,6 +25,14 @@ perppy.msg.trader
    :undoc-members:
    :show-inheritance:
 
+perppy.msg.staking
+------------------------
+
+.. automodule:: perppy.msg.staking
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 perppy.msg.event.position\_changed module
 -----------------------------------------
 
