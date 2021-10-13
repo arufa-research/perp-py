@@ -153,4 +153,12 @@ Remove margin.
 Staking
 *****************
 
+Get PERP staking info.
 
+.. code-block:: python
+
+    from perppy.staking import StakingConnector
+
+    staking_conn = StakingConnector(network='staging') # no need to private key for fetching info
+    stats = staking_conn.get_current_stats()
+    print(stats)

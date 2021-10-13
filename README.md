@@ -187,14 +187,14 @@ $ export PRIVATE_KEY='<YOUR_KEY_HERE>'
 
 **Note**: Above variable exported is `PRIVATE_KEY`, so first argument in constructor of `StakingConnector` should be `'PRIVATE_KEY'`.
 
-+ Stake PERP tokens.
++ Get PERP staking info.
 
 ```python
-```
+from perppy.staking import StakingConnector
 
-+ Unstake PERP tokens.
-
-```python
+staking_conn = StakingConnector(network='staging') # no need to private key for fetching info
+stats = staking_conn.get_current_stats()
+print(stats)
 ```
 
 

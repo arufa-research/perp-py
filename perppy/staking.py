@@ -9,10 +9,16 @@ from perppy.utils.provider import Web3ProviderFactory
 
 class StakingConnector:
     """
-        ExecuteConnector acts as a client to stake, unstake
+        StakingConnector acts as a client to stake, unstake
         on perp.exchange and get current staking information
     """
     def __init__(self, private_key_env_var: str = None, network = 'production'):
+        """
+        Create a new StakingConnector object.
+
+        :param private_key_env_var: environment variable that stores your private key
+        :param network: Network to connect to. Valid values are 'production' and 'staging'
+        """
         self.network         = network
         self.layer1_provider = Web3ProviderFactory().get_layer1_provider(self.network)
 
@@ -20,6 +26,9 @@ class StakingConnector:
             self.layer1_account  = self.layer1_provider.eth.account.privateKeyToAccount(os.environ[private_key_env_var])
 
     def get_current_stats(self):
+        """
+        Fetch staking rewards related information.
+        """
         perp_reward_vesting_addr     = MetaData().get_layer1_contract('PerpStakingRewardVesting', network=self.network)
         perp_reward_no_vesting_addr  = MetaData().get_layer1_contract('PerpStakingRewardNoVesting', network=self.network)
         perp_reward_vesting_abi  = AbiFactory().get_contract_abi('PerpRewardVesting')
