@@ -31,7 +31,8 @@ class Trader:
         :param portfolios: list of `Portfolio` objects, each for an AMM pair with non-zero balance
         """
         for portfolio in portfolios:
-            self.portfolios[portfolio.pair_name] = portfolio
+            if portfolio.pair_name is not None:
+                self.portfolios[portfolio.pair_name] = portfolio
 
     def __repr__(self):
         """

@@ -21,6 +21,8 @@ class QueryConnector:
 
         :param network: Network to connect to. Valid values are 'production' and 'staging'
         """
+        if network not in ['production', 'staging']:
+            raise ValueError(f"Invalid network {network}, should be 'production' or 'staging'")
         self.network = network
 
     def get_position_changes(
