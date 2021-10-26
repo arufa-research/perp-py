@@ -97,26 +97,26 @@ class ExecuteConnector:
             raise ValueError(f"Invalid USDC amount, {usdc_amount}")
 
         # approve bridge to use usdc
-        receipt = self._approve_layer2_bridge(usdc_amount)
+        receipt = self._approve_layer1_bridge(usdc_amount)
 
         # deposit usdc and return receipt
-        layer2_bridge_addr = Web3.toChecksumAddress(MetaData().get_layer2_contract('ClientBridge', network=self.network))
-        layer2_bridge_abi  = AbiFactory().get_contract_abi('ClientBridge')
-        layer2_bridge_contract = self.layer2_provider.eth.contract(address=layer2_bridge_addr, abi=layer2_bridge_abi)
+        layer1_bridge_addr = Web3.toChecksumAddress(MetaData().get_layer1_contract('ClientBridge', network=self.network))
+        layer1_bridge_abi  = AbiFactory().get_contract_abi('ClientBridge')
+        layer1_bridge_contract = self.layer1_provider.eth.contract(address=layer1_bridge_addr, abi=layer1_bridge_abi)
 
-        layer2_usdc_addr = Web3.toChecksumAddress(MetaData().get_layer2_contract('usdc', network=self.network))
-        layer2_usdc_abi  = AbiFactory().get_contract_abi('usdc')
-        layer2_usdc_contract = self.layer2_provider.eth.contract(address=layer2_usdc_addr, abi=layer2_usdc_abi)
+        layer1_usdc_addr = Web3.toChecksumAddress(MetaData().get_layer1_contract('usdc', network=self.network))
+        layer1_usdc_abi  = AbiFactory().get_contract_abi('usdc')
+        layer1_usdc_contract = self.layer1_provider.eth.contract(address=layer1_usdc_addr, abi=layer1_usdc_abi)
 
-        nonce = self.layer2_provider.eth.get_transaction_count(self.layer2_account.address)
-        transfer_transaction = layer2_bridge_contract.functions.erc20Transfer(layer2_usdc_addr, self.layer2_account.address, {'d':usdc_amount*ETH_DECIMALS}).buildTransaction({
+        nonce = self.layer1_provider.eth.get_transaction_count(self.layer1_account.address)
+        transfer_transaction = layer1_bridge_contract.functions.erc20Transfer(layer1_usdc_addr, self.layer1_account.address, {'d':usdc_amount*ETH_DECIMALS}).buildTransaction({
             'nonce':nonce,
             'gas': 1000000,
-            'gasPrice': self.layer2_provider.eth.gasPrice,
+            'gasPrice': self.layer1_provider.eth.gasPrice,
         })
-        signed_tx = self.layer2_provider.eth.account.sign_transaction(transfer_transaction, private_key=self.layer2_account.key)
-        tx_hash = self.layer2_provider.eth.send_raw_transaction(signed_tx.rawTransaction)
-        receipt = self.layer2_provider.eth.wait_for_transaction_receipt(tx_hash)
+        signed_tx = self.layer1_provider.eth.account.sign_transaction(transfer_transaction, private_key=self.layer1_account.key)
+        tx_hash = self.layer1_provider.eth.send_raw_transaction(signed_tx.rawTransaction)
+        receipt = self.layer1_provider.eth.wait_for_transaction_receipt(tx_hash)
         return receipt
 
     def withdraw_from_layer2(
@@ -135,23 +135,23 @@ class ExecuteConnector:
         self._approve_layer2_bridge(usdc_amount)
 
         # withdraw usdc and return receipt
-        layer1_bridge_addr = Web3.toChecksumAddress(MetaData().get_layer1_contract('RootBridge', network=self.network))
-        layer1_bridge_abi  = AbiFactory().get_contract_abi('RootBridge')
-        layer1_bridge_contract = self.layer1_provider.eth.contract(address=layer1_bridge_addr, abi=layer1_bridge_abi)
+        layer2_bridge_addr = Web3.toChecksumAddress(MetaData().get_layer2_contract('RootBridge', network=self.network))
+        layer2_bridge_abi  = AbiFactory().get_contract_abi('RootBridge')
+        layer2_bridge_contract = self.layer2_provider.eth.contract(address=layer2_bridge_addr, abi=layer2_bridge_abi)
 
-        layer1_usdc_addr = Web3.toChecksumAddress(MetaData().get_layer1_contract('usdc', network=self.network))
-        layer1_usdc_abi  = AbiFactory().get_contract_abi('usdc')
-        layer1_usdc_contract = self.layer1_provider.eth.contract(address=layer1_usdc_addr, abi=layer1_usdc_abi)
+        layer2_usdc_addr = Web3.toChecksumAddress(MetaData().get_layer2_contract('usdc', network=self.network))
+        layer2_usdc_abi  = AbiFactory().get_contract_abi('usdc')
+        layer2_usdc_contract = self.layer2_provider.eth.contract(address=layer2_usdc_addr, abi=layer2_usdc_abi)
 
-        nonce = self.layer1_provider.eth.get_transaction_count(self.layer1_account.address)
-        transfer_transaction = layer1_bridge_contract.functions.erc20Transfer(layer1_usdc_addr, self.layer1_account.address, {'d':usdc_amount*ETH_DECIMALS}).buildTransaction({
+        nonce = self.layer2_provider.eth.get_transaction_count(self.layer2_account.address)
+        transfer_transaction = layer2_bridge_contract.functions.erc20Transfer(layer2_usdc_addr, self.layer2_account.address, {'d':usdc_amount*ETH_DECIMALS}).buildTransaction({
             'nonce':nonce,
             'gas': 1000000,
-            'gasPrice': self.layer1_provider.eth.gasPrice,
+            'gasPrice': self.layer2_provider.eth.gasPrice,
         })
-        signed_tx = self.layer1_provider.eth.account.sign_transaction(transfer_transaction, private_key=self.layer1_account.key)
-        tx_hash = self.layer1_provider.eth.send_raw_transaction(signed_tx.rawTransaction)
-        receipt = self.layer1_provider.eth.wait_for_transaction_receipt(tx_hash)
+        signed_tx = self.layer2_provider.eth.account.sign_transaction(transfer_transaction, private_key=self.layer2_account.key)
+        tx_hash = self.layer2_provider.eth.send_raw_transaction(signed_tx.rawTransaction)
+        receipt = self.layer2_provider.eth.wait_for_transaction_receipt(tx_hash)
         return receipt
 
     def _approve_clearing_house( # clearing house contract is used to open/close positions, margins
